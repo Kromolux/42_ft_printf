@@ -6,7 +6,7 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 15:17:16 by rkaufman          #+#    #+#             */
-/*   Updated: 2021/12/29 20:04:37 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/03 20:57:19 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_itoa(long n)
 	i = ft_get_str_len(tmp, sign);
 	output = malloc(i + 1);
 	if (!output)
-		return (0);
+		return (NULL);
 	output[i--] = '\0';
 	while (tmp > 9)
 	{

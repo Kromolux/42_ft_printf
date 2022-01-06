@@ -6,7 +6,7 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 09:25:12 by rkaufman          #+#    #+#             */
-/*   Updated: 2021/12/29 20:52:10 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:49:59 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_read_char(va_list *args)
 	tmp_string = (char *) malloc(sizeof(char) * 2);
 	if (!tmp_string)
 		return (NULL);
-	tmp_string[0] = (char) va_arg(*args, char *);
+	tmp_string[0] = (char)((int) va_arg(*args, int));
 	tmp_string[1] = '\0';
 	return (tmp_string);
 }

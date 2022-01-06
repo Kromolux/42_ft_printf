@@ -6,7 +6,7 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:12:02 by rkaufman          #+#    #+#             */
-/*   Updated: 2021/12/21 10:07:01 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/05 21:22:30 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!substring)
 		return (NULL);
 	if (start <= s_len)
-	{
 		ft_strlcpy((char *) substring, &s[start], len + 1);
-		return ((char *) substring);
-	}
-	((char *) substring)[0] = '\0';
+	else
+		((char *) substring)[0] = '\0';
 	return ((char *) substring);
 }

@@ -1,10 +1,17 @@
 NAME 		:=	libftprintf.a
 CC 			:=	gcc
-HEADERFILES :=	libftprintf.h
+HEADERFILES :=	libftprintf.h 
+				#libftprintf_bonus.h
 SRCFILES 	:=	ft_printf.c \
 				ft_conversation.c \
-				ft_hex.c
-SRCBONUS	:=	ft_bonus.c
+				ft_hex.c \
+				ft_basic.c
+SRCBONUS	:=	ft_printf_bonus.c \
+				ft_flags_bonus.c \
+				ft_conversation.c \
+				ft_hex.c \
+				ft_basic.c
+
 OBJFILES 	:=	$(SRCFILES:%.c=%.o)
 OBJBONUS	:=	$(SRCBONUS:%.c=%.o)
 LDFLAGS 	?=
@@ -18,17 +25,15 @@ LIBFT_H		:=	libft.h
 all: $(NAME)
 
 $(NAME): makelibft $(OBJFILES)
-	ar rc $(NAME) $(OBJFILES)
-	ranlib $(NAME)
+	ar rcs $(NAME) $(OBJFILES)
 
-%.o: %.c $(HEADERFILES)
+%.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-bonus: $(OBJBONUS)
-	ar rc $(NAME) $(OBJBONUS)
-	ranlib $(NAME)
+bonus: makelibft $(OBJBONUS)
+	ar rcs $(NAME) $(OBJBONUS)
 
-%.o: %.c $(HEADERFILES)
+%.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 makelibft:
@@ -55,5 +60,3 @@ norminette:
 	norminette -R CheckForbiddenSourceHeader $(SRCFILES) $(SRCBONUS)
 
 .PHONY: clean fclean re
-
-#gcc -Wall -Werror -Wextra libftprintf.h ft_printf.c ft_conversation.c ft_hex.c libft/libft.h libft/ft_strlen.c libft/ft_strlcpy.c libft/ft_itoa.c libft/ft_strdup.c

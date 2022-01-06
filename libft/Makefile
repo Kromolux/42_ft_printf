@@ -1,6 +1,6 @@
-NAME 		:=	libft.a
-CC 			:=	gcc
-HEADERFILES :=	libft.h
+NAME		:=	libft.a
+CC			:=	gcc
+HEADERFILES	:=	libft.h
 SRCFILES 	:=	ft_strlen.c \
 				ft_isalpha.c \
 				ft_isdigit.c \
@@ -56,18 +56,13 @@ so:
 	$(CC) -shared -o libft.so $(OBJFILES) $(OBJBONUS)
 
 $(NAME): $(OBJFILES)
-	ar rc $(NAME) $(OBJFILES)
-	ranlib $(NAME)
+	ar rcs $(NAME) $(OBJFILES)
 
-%.o: %.c $(HEADERFILES)
+%.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 bonus: $(OBJBONUS)
-	ar rc $(NAME) $(OBJBONUS)
-	ranlib $(NAME)
-
-%.o: %.c $(HEADERFILES)
-	$(CC) -c $(CFLAGS) -o $@ $<
+	ar rcs $(NAME) $(OBJBONUS)
 
 clean: 
 	rm -f $(OBJFILES) $(OBJBONUS)

@@ -6,7 +6,7 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:03:44 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/05 19:16:30 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:42:28 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ typedef struct s_flags
 	int		leading_zeros_x;
 	int		leading_whitespace;
 	int		leading_plus;
+	char	conversion;
 }				t_flags;
 
 int		ft_printf(const char *s, ...);
 
 t_flags	*ft_read_flags(const char *s, int *i);
-char	*ft_apply_flags(char *s, const char c, t_flags *flags);
+char	*ft_apply_flags(char *s, t_flags *flags);
 
 char	*ft_read_conversation(const char *s, va_list *args);
 int		ft_write_char(char c);
-int		ft_write_string(char *s);
+int		ft_write_string(char *s, char conversion);
 
 char	*ft_read_char(va_list *args);
 char	*ft_read_string(va_list *args);

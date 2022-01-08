@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_output.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 09:57:35 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/08 07:58:18 by rkaufman         ###   ########.fr       */
+/*   Created: 2022/01/07 06:27:38 by rkaufman          #+#    #+#             */
+/*   Updated: 2022/01/07 16:55:25 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
+#include "libft/libft.h"
+#include <stdio.h>
 
-char	*ft_strchr(const char *s, int c)
+int	ft_write_char(char c)
 {
-	size_t	i;
-	size_t	s_len;
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_write_string(char *s, char conversion)
+{
+	int	i;
 
 	i = 0;
-	s_len = ft_strlen(s) + 1;
-	while (i < s_len)
-	{
-		if (s[i] == (char) c)
-			return ((char *) &s[i]);
+	while (s[i])
 		i++;
-	}
-	return (NULL);
+	if (conversion == 'c' && i == 0)
+		i = 1;
+	write(1, s, i);
+	free(s);
+	return (i);
 }

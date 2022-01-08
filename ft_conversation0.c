@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_basic.c                                         :+:      :+:    :+:   */
+/*   ft_conversation0.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 08:54:01 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/05 18:56:26 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:52:18 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,6 @@ char	*ft_read_conversation(const char *s, va_list *args)
 		return (ft_create_percentage());
 	else
 		return (ft_strdup(""));
-}
-
-int	ft_write_char(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_write_string(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	write(1, s, i);
-	free(s);
-	return (i);
 }
 
 static char	*ft_create_percentage(void)

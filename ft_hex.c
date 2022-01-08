@@ -6,14 +6,41 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:57:19 by rkaufman          #+#    #+#             */
-/*   Updated: 2021/12/29 20:31:15 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/07 19:22:22 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft/libft.h"
-
+#include <stdio.h>
 static void	ft_convert_to_hex(char *output, char c);
+
+char	*ft_read_hex(va_list *args, char c)
+{
+	char			*tmp_string;
+	unsigned int	tmp_ui;
+	char			*ptr;
+	int				i;
+
+	tmp_string = (char *) malloc(sizeof(char) * 9);
+	if (!tmp_string)
+		return (NULL);
+	tmp_ui = (unsigned int) va_arg(*args, unsigned int);
+	ptr = (char *) &tmp_ui;
+	ft_create_hex_string(tmp_string, ptr, 4, 0);
+	//printf("\nhex string output = [%s]\n", tmp_string);
+	if (c == 'X')
+	{
+		i = 0;
+		while (tmp_string[i])
+		{
+			if (tmp_string[i] >= 'a' && tmp_string[i] <= 'f')
+				tmp_string[i] -= 32;
+			i++;
+		}
+	}
+	return (tmp_string);
+}
 
 void	ft_create_hex_string(char *output, char *input, int n,
 			int leading_zeros)
@@ -24,15 +51,17 @@ void	ft_create_hex_string(char *output, char *input, int n,
 	n--;
 	if (leading_zeros == 0)
 	{
-		while (input[n] == (char) 0)
+		while (input[n] == (char) 0 && n > 0)
 			n--;
-		ft_convert_to_hex(&output[i], input[n]);
-		if (leading_zeros == 1 && output[i] == '0')
+		ft_convert_to_hex(output, input[n]);
+		if (output[0] == '0')
 		{
-			output[i] = output[i + 1];
+			output[0] = output[1];
 			i++;
+			n--;
 		}
 	}
+	//printf("output = %s\n", output);
 	while (n >= 0)
 	{
 		ft_convert_to_hex(&output[i], input[n]);

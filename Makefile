@@ -1,16 +1,20 @@
-NAME 		:=	libftprintf.a
-CC 			:=	gcc
+NAME		:=	libftprintf.a
+CC			:=	gcc
 HEADERFILES :=	libftprintf.h 
 				#libftprintf_bonus.h
 SRCFILES 	:=	ft_printf.c \
-				ft_conversation.c \
+				ft_conversation0.c \
+				ft_conversation1.c \
 				ft_hex.c \
-				ft_basic.c
+				ft_output.c
+				
 SRCBONUS	:=	ft_printf_bonus.c \
-				ft_flags_bonus.c \
-				ft_conversation.c \
+				ft_read_flags_bonus.c \
+				ft_conversation0.c \
+				ft_conversation1.c \
+				ft_apply_flags_bonus.c \
 				ft_hex.c \
-				ft_basic.c
+				ft_output.c
 
 OBJFILES 	:=	$(SRCFILES:%.c=%.o)
 OBJBONUS	:=	$(SRCBONUS:%.c=%.o)

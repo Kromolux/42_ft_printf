@@ -6,7 +6,7 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:24:52 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/08 21:35:01 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:57:03 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ static char		*ft_apply_precision(char *s, t_flags *flags)
 	if (s[0] == '-' || s[0] == '+')
 	{
 		s_len--;
-		prefix = ft_add_char(s[0], 1);
+		tmp1 = ft_add_char(s[0], 1);
+		free(prefix);
+		prefix = tmp1;
 		offset++;
 	}
 	//printf("precision = %i string = %s char = %c prefix = %s\n", flags->precision, s, flags->conversion, prefix);
@@ -102,8 +104,7 @@ static char		*ft_apply_precision(char *s, t_flags *flags)
 		{
 			tmp1 = ft_add_char('0', flags->precision - s_len);
 			tmp2 = ft_strjoin(prefix, tmp1);
-			if (prefix)
-				free(prefix);
+			free(prefix);
 			free(tmp1);
 			//printf("adding zeros to the string = %s = %s\n", prefix, s);
 			tmp1 = ft_strjoin(tmp2, &s[offset]);
@@ -123,6 +124,8 @@ static char		*ft_apply_right_aligned(char *prefix, char *s, t_flags *flags)
 	int		s_len;
 	int		prefix_len;
 	char	c;
+	char	*tmp1;
+	char	*tmp2;
 
 	s_len = ft_strlen(s);
 	if (s_len == 0)
@@ -136,9 +139,21 @@ static char		*ft_apply_right_aligned(char *prefix, char *s, t_flags *flags)
 		else
 			c = ' ';
 		if (prefix[1] == 'x' || prefix[1] == 'X')
-			prefix = ft_strjoin(prefix, ft_add_char(c, flags->right_aligned - (prefix_len + s_len)));
+		{
+			tmp1 = ft_add_char(c, flags->right_aligned - (prefix_len + s_len));
+			tmp2 = ft_strjoin(prefix, tmp1);
+			free(tmp1);
+			free(prefix);
+			prefix = tmp2;
+		}
 		else
-			prefix = ft_strjoin(ft_add_char(c, flags->right_aligned - (prefix_len + s_len)), prefix);
+		{
+			tmp1 = ft_add_char(c, flags->right_aligned - (prefix_len + s_len));
+			tmp2 = ft_strjoin(tmp1, prefix);
+			free(tmp1);
+			free(prefix);
+			prefix = tmp2;
+		}
 	}
 	//free(s);
 	//printf("prefix before return = [%s]\n", prefix);
@@ -165,8 +180,10 @@ static char	*ft_add_char(char c, int count)
 
 static char		*ft_apply_left_aligned(char *prefix, char *s, t_flags *flags)
 {
-	int	s_len;
-	int	prefix_len;
+	int		s_len;
+	int		prefix_len;
+	char	*tmp1;
+	char	*tmp2;
 
 	s_len = ft_strlen(s);
 	if (s_len == 0)
@@ -175,7 +192,11 @@ static char		*ft_apply_left_aligned(char *prefix, char *s, t_flags *flags)
 	//printf("prefix = %s prefix_len %i s_len = %i\n", prefix, prefix_len, s_len);
 	if (ft_strchr("cspdiuxX", flags->conversion) && (prefix_len + s_len) < flags->left_aligned)
 	{
-		s = ft_strjoin(s, ft_add_char(' ', flags->left_aligned - (prefix_len + s_len)));
+		tmp1 = ft_add_char(' ', flags->left_aligned - (prefix_len + s_len));
+		tmp2 = ft_strjoin(s, tmp1);
+		free(tmp1);
+		free(s);
+		s = tmp2;
 	}
 	//printf("prefix = %s\n", prefix);
 	//if (flags->conversion == 'd')

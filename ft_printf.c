@@ -6,12 +6,11 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 10:39:00 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/10 17:45:43 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:36:16 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 int	ft_printf(const char *s, ...)
 {

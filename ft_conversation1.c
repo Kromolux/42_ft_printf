@@ -6,12 +6,11 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 09:25:12 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/08 21:53:44 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:36:00 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 char	*ft_read_char(va_list *args)
 {
@@ -20,7 +19,7 @@ char	*ft_read_char(va_list *args)
 	tmp_string = (char *) malloc(sizeof(char) * 2);
 	if (!tmp_string)
 		return (NULL);
-	tmp_string[0] = (char) ((int) va_arg(*args, int));
+	tmp_string[0] = (char)((int) va_arg(*args, int));
 	tmp_string[1] = '\0';
 	return (tmp_string);
 }
@@ -56,9 +55,16 @@ char	*ft_read_pointer(va_list *args)
 	if (!tmp_string)
 		return (NULL);
 	memory_address = va_arg(*args, unsigned long long);
-	ptr = (char *) &memory_address;
-	tmp_string[0] = '0';
-	tmp_string[1] = 'x';
-	ft_create_hex_string(&tmp_string[2], ptr, 8, 0);
+	if (!memory_address && LINUX)
+	{
+		ft_strlcpy(tmp_string, "(nil)", 7);
+	}
+	else
+	{
+		ptr = (char *) &memory_address;
+		tmp_string[0] = '0';
+		tmp_string[1] = 'x';
+		ft_create_hex_string(&tmp_string[2], ptr, 8, 0);
+	}
 	return (tmp_string);
 }

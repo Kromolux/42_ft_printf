@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_output.c                                        :+:      :+:    :+:   */
+/*   ft_output_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 06:27:38 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/12 15:09:15 by rkaufman         ###   ########.fr       */
+/*   Created: 2022/01/12 15:02:46 by rkaufman          #+#    #+#             */
+/*   Updated: 2022/01/13 13:36:39 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libftprintf_bonus.h"
 
 int	ft_write_char(char c)
 {
@@ -18,16 +18,24 @@ int	ft_write_char(char c)
 	return (1);
 }
 
-int	ft_write_string(char *s, char c)
+int	ft_write_string(char *s, t_flags *flags)
 {
 	int	i;
 
 	i = 0;
 	while (s[i])
 		i++;
-	if (c == 'c' && i == 0)
-		i = 1;
+	if (flags->conversion == 'c')
+	{
+		if (i == 0)
+			i = 1;
+		if (i < flags->left_aligned)
+			i = flags->left_aligned;
+		if (i < flags->right_aligned)
+			i = flags->right_aligned;
+	}
 	write(1, s, i);
+	free(flags);
 	free(s);
 	return (i);
 }

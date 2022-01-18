@@ -6,12 +6,11 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 08:54:01 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/08 21:52:18 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:37:29 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 static char	*ft_create_percentage(void);
 

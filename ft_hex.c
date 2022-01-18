@@ -6,13 +6,12 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:57:19 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/07 19:22:22 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:34:43 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
-#include <stdio.h>
+
 static void	ft_convert_to_hex(char *output, char c);
 
 char	*ft_read_hex(va_list *args, char c)
@@ -28,7 +27,6 @@ char	*ft_read_hex(va_list *args, char c)
 	tmp_ui = (unsigned int) va_arg(*args, unsigned int);
 	ptr = (char *) &tmp_ui;
 	ft_create_hex_string(tmp_string, ptr, 4, 0);
-	//printf("\nhex string output = [%s]\n", tmp_string);
 	if (c == 'X')
 	{
 		i = 0;
@@ -61,7 +59,6 @@ void	ft_create_hex_string(char *output, char *input, int n,
 			n--;
 		}
 	}
-	//printf("output = %s\n", output);
 	while (n >= 0)
 	{
 		ft_convert_to_hex(&output[i], input[n]);

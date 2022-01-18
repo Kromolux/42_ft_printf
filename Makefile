@@ -6,7 +6,7 @@
 #    By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 19:38:27 by rkaufman          #+#    #+#              #
-#    Updated: 2022/01/14 20:04:24 by rkaufman         ###   ########.fr        #
+#    Updated: 2022/01/18 19:54:23 by rkaufman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,6 @@ $(NAME): makelibft $(OBJFILES)
 bonus: makelibft $(OBJBONUS)
 	cp $(LIBFT_PATH)$(LIBFT_FILE) $(NAME)
 	ar rcs $(NAME) $(OBJBONUS) 
-
-%.o: %.c
-	$(CC) -c $(CFLAGS) -o $@ $<
 
 makelibft:
 	$(MAKE) -C $(LIBFT_PATH)

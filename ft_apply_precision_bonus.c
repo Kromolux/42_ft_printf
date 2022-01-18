@@ -6,7 +6,7 @@
 /*   By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 16:58:53 by rkaufman          #+#    #+#             */
-/*   Updated: 2022/01/13 19:51:53 by rkaufman         ###   ########.fr       */
+/*   Updated: 2022/01/18 21:24:50 by rkaufman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*ft_apply_precision(char *s, t_flags *flags)
 	s_len = (int) ft_strlen(s);
 	if (flags->conversion == 's')
 	{
-		if (s_len >= flags->precision && ft_strncmp(s, "(null)", 6) != 0)
+		if (s_len >= flags->precision)
 			s[flags->precision] = '\0';
-		else if (flags->precision < s_len && ft_strncmp(s, "(null)", 6) == 0)
-			s[0] = '\0';
+		//else if (flags->precision < s_len && ft_strncmp(s, "(null)", 6) == 0)
+		//	s[0] = '\0';
 	}
 	else if (ft_strchr("diuxX", flags->conversion))
 		s = ft_create_precision(s, flags, s_len);

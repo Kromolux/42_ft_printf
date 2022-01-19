@@ -6,7 +6,7 @@
 #    By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 19:38:27 by rkaufman          #+#    #+#              #
-#    Updated: 2022/01/18 19:54:23 by rkaufman         ###   ########.fr        #
+#    Updated: 2022/01/19 09:14:28 by rkaufman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,50 +34,48 @@ SRCBONUS	:=	ft_printf_bonus.c \
 
 OBJFILES 	:=	$(SRCFILES:%.c=%.o)
 OBJBONUS	:=	$(SRCBONUS:%.c=%.o)
-LDFLAGS 	?=
-CFLAGS 		?=	-Wall -Wextra -Werror
 
-MAKE		:=	make
-LIBFT_PATH	:=	libft/
+CFLAGS 		:=	-Wall -Wextra -Werror
+
+LIBFT_PATH	:=	libft
 LIBFT_FILE	:=	libft.a
 LIBFT_H		:=	libft.h
+
+#%.o: %.c
+#	$(CC) -c $(CFLAGS) -o $@ $<
 
 all: $(NAME)
 
 $(NAME): makelibft $(OBJFILES)
-	cp $(LIBFT_PATH)$(LIBFT_FILE) $(NAME)
-	ar rcs $(NAME) $(OBJFILES)
-
-%.o: %.c
-	$(CC) -c $(CFLAGS) -o $@ $<
+	$(AR) rcs $(NAME) $(OBJFILES)
 
 bonus: makelibft $(OBJBONUS)
-	cp $(LIBFT_PATH)$(LIBFT_FILE) $(NAME)
-	ar rcs $(NAME) $(OBJBONUS) 
+	$(AR) rcs $(NAME) $(OBJBONUS) 
 
-makelibft:
-	$(MAKE) -C $(LIBFT_PATH)
+makelibft: 
+	make -C $(LIBFT_PATH)
+	cp $(LIBFT_PATH)/$(LIBFT_FILE) $(NAME)
 
 clean: cleanlibft
 	rm -f $(OBJFILES) $(OBJBONUS)
 
 cleanlibft:
-	$(MAKE) -C $(LIBFT_PATH) clean
+	make -C $(LIBFT_PATH) clean
 
 fclean: fcleanlibft clean
 	rm -f $(NAME)
 
 fcleanlibft:
-	$(MAKE) -C $(LIBFT_PATH) fclean
+	make -C $(LIBFT_PATH) fclean
 
 re: relibft fclean all
 
 relibft:
-	$(MAKE) -C $(LIBFT_PATH) re
+	make -C $(LIBFT_PATH) re
 
 norminette:
 	norminette -R CheckForbiddenSourceHeader $(SRCFILES) $(SRCBONUS) $(HEADERFILES)
-	$(MAKE) -C $(LIBFT_PATH) norminette
+	make -C $(LIBFT_PATH) norminette
 
 git:
 	git add **/*
